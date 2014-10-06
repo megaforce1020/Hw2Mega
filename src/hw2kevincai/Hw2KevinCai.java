@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class Hw2KevinCai {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         // TODO code application logic here
                //Define some variables to use in program
         Scanner console = new Scanner(System.in);
@@ -64,7 +65,9 @@ public class Hw2KevinCai {
                 System.out.println("Secret number is " +secretNumber );
         //Ask user for input and place in do while to ensure games does not prematurely end if User enters in a value other than specified
         System.out.println("Your guess from 1-100 (enter 0 to stop):");
+        
         do{
+        try{
             guess = console.nextInt();
             System.out.println("Your guess from 1 - 100 is? (enter 0 to stop) ");
         
@@ -86,11 +89,19 @@ public class Hw2KevinCai {
             numGuess = numGuess +1;
             numGamesWon = numGamesWon + 1;
             System.out.println("\n" +"Perfect. You guessed correct in " +numGuess  +" attempts. "
-                    + "Would you like to play again (Y/N)?");
+                    + "Would you like to play again (1/0)?");
             playAgain = console.nextLine();
 
     } 
     }
+        catch (InputMismatchException ime) {
+                
+                error = -1;
+                System.err.println("You did not enter a number.");
+                console.nextLine();
+            }
+        
+        }
         while (guess!=0) ;
         System.out.println("\n" +gamerName + " Your Stats:");    
         System.out.println("Number of Guesses " + numGuess);
@@ -109,13 +120,17 @@ public class Hw2KevinCai {
         BufferedReader inputBuff = new BufferedReader
                 (new FileReader("gamescores.txt"));
         
+        while ((read = inputBuff.readLine())!=null) {
+                        System.out.println("The read status is:" + read);
+                    }
+        
         
         
 }
 
     private static int writeScoresToFile(String string2) {
         
-        int answer = -1;
+        int success = 0;
         BufferedWriter outputBuff = null;
         
         try {
@@ -135,7 +150,7 @@ public class Hw2KevinCai {
         // return true; would be correct or
         // return answer;
         
-        return answer;
+        return success;
     }
 }
 
