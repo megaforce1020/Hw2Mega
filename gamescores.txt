@@ -3,3 +3,9 @@ Josh		8		2
 bryan		4		1
 bryan		5		2
 tommy		1		1
+Tory		1		1
+Weed		1		1
+Nord		1		1
+Liou		1		1
+Bill		0		0
+Kim		1		1
