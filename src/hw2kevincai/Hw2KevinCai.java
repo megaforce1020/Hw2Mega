@@ -125,17 +125,27 @@ public class Hw2KevinCai {
                 .append("\t\t").append(numGamesWon).append("\n");
         strToWrite = stringToSave.toString();
         System.out.println("" + strToWrite);
-
+        
+        //created an int variable to reference a method that is defined below
         int writeStatus = writeScoresToFile(strToWrite);
+        //this is to show user that the output to file was successful
         System.out.println("The write status is: " + writeStatus);
 
         BufferedReader inputBuff = new BufferedReader(new FileReader("gamescores.txt"));
 
-        while ((read = inputBuff.readLine()) != null) {
-            System.out.println("The read status is:" + read);
-        }
-
+        try{
+     read = stringToSave.toString();
+        System.out.println(""+read);
+    int readStatus = readScoresFromFile(read);
+        System.out.println("The read status is: " + readStatus);
     }
+    catch (IOException ioe) {
+            System.err.println("There was an error writing to the file: " 
+                    + ioe.toString());
+        }
+    }
+
+    
 
     private static int writeScoresToFile(String string2) {
 
@@ -159,4 +169,25 @@ public class Hw2KevinCai {
         // return answer;
         return success;
     }
+    private static int readScoresFromFile (String string3) throws FileNotFoundException, IOException {
+    
+        
+        int answer2= 1;
+    String read = "gamescores.txt";
+   try{
+    FileReader inputFile = new FileReader (read);
+            try (BufferedReader inputBuff = new BufferedReader (inputFile)) {
+                String read1;
+                
+                while ((read1 = inputBuff.readLine()) != null) {
+                    System.out.println("The read status is:" + read);
+                }   }
+    }catch(Exception error){
+            System.out.println("Error while reading file line by line:" 
+            + error.getMessage());                      
+    
+
+}
+return answer2;
+}
 }
